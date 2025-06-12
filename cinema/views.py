@@ -1,8 +1,4 @@
-from rest_framework.generics import (
-    GenericAPIView,
-    ListCreateAPIView,
-    RetrieveUpdateDestroyAPIView,
-)
+from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import (
     ListModelMixin,
     CreateModelMixin,
@@ -108,5 +104,5 @@ class CinemaHallViewSet(
 
 
 class MovieViewSet(ModelViewSet):
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.prefetch_related("actors", "genres").all()
     serializer_class = MovieSerializer
